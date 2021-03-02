@@ -1,0 +1,43 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-10-24 02:37:51 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:39:20 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:41:48 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:45:38 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:45:42 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:45:51 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:46:22 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:46:46 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:46:53 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:46:59 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:47:09 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:47:16 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:47:46 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:48:04 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:48:05 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:49:37 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:49:52 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:49:59 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:50:11 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:50:21 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:50:26 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:50:37 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:50:54 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:51:03 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:51:23 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:52:17 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:52:30 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:52:41 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:52:46 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:53:14 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:53:21 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:53:22 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:53:30 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:53:46 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 07:54:01 --> Severity: error --> Exception: syntax error, unexpected ';', expecting ')' D:\xampp\htdocs\djawipos\application\modules\transaksi\views\v_AddDataPembelian.php 93
+ERROR - 2020-10-24 02:54:01 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:54:08 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 02:54:28 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 14:22:51 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 14:23:01 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
+ERROR - 2020-10-24 14:23:17 --> 404 Page Not Found: ../modules/transaksi/controllers/Transaksi/frontend
