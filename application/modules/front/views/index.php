@@ -1,15 +1,12 @@
 <?php
 // Header
-$this->load->view('templates/v_HeaderAdmin');
+$this->load->view('templates/v_Header');
 
-// Menu
-$this->load->view('templates/v_MenuAdmin');
-
-// Left Content
-$this->load->view('templates/v_MenuLeftAdmin');
+// Sidebar
+$this->load->view('templates/v_MenuLeft');
 
 // Content View
 $this->load->view($view);
 
 // Footer
-$this->load->view('templates/v_FooterAdmin');
+$this->load->view('templates/v_Footer');
