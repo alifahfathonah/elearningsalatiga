@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2021 at 09:31 AM
+-- Generation Time: Mar 02, 2021 at 02:00 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `elearning`
+-- Database: `sisfosmkmuhammadiyah`
 --
 
 -- --------------------------------------------------------
@@ -112,6 +112,80 @@ CREATE TABLE `analisis_essay` (
 
 INSERT INTO `analisis_essay` (`id_analisis_essay`, `id_ujian`, `id_soal_essay`, `id_siswa`, `jawaban`) VALUES
 (1, 2, 1, 1, 'oke oce sip deh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bursa`
+--
+
+CREATE TABLE `bursa` (
+  `id_bursa` int(11) NOT NULL,
+  `keterangan` text DEFAULT NULL,
+  `id_bursa_pic` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bursa`
+--
+
+INSERT INTO `bursa` (`id_bursa`, `keterangan`, `id_bursa_pic`) VALUES
+(1, 'Adalah Lembaga yang menjalankan fungsi mempertemukan / memfasilitasi pertemuan antara pencari kerja dengan pengguna tenaga kerja untuk ditempatkan melalui sistem antar kerja. BKK SMK Muhammadiyah 1 Purbalingga maupun dari Lulusan dari sekolah lain untuk ditempatkan di perusahaan - perusahaan ternama.', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bursa_pic`
+--
+
+CREATE TABLE `bursa_pic` (
+  `id_bursa_pic` int(11) NOT NULL,
+  `keterangan` text DEFAULT NULL,
+  `file` varchar(128) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bursa_pic`
+--
+
+INSERT INTO `bursa_pic` (`id_bursa_pic`, `keterangan`, `file`) VALUES
+(1, 'Seleksi Kerja 1', 'eskul-2021-03-02_20_03_03.jpg'),
+(2, 'Seleksi Kerja 2', 'bursa-2021-03-02_18_03_46.jpg'),
+(3, 'Pemberangkatan', 'bursa-2021-03-02_18_03_46.jpg'),
+(4, 'Penempatan', 'bursa-2021-03-02_18_03_46.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ekstrakul`
+--
+
+CREATE TABLE `ekstrakul` (
+  `id_eskul` int(11) NOT NULL,
+  `keterangan` text DEFAULT NULL,
+  `file` varchar(128) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ekstrakul`
+--
+
+INSERT INTO `ekstrakul` (`id_eskul`, `keterangan`, `file`) VALUES
+(1, 'Adalah Lembaga yang menjalankan fungsi mempertemukan / memfasilitasi pertemuan antara pencari kerja dengan pengguna tenaga kerja untuk ditempatkan melalui sistem antar kerja. BKK SMK Muhammadiyah 1 Purbalingga memfasilitasi lulusan baik dari sekolah lain untuk ditempatkan di perusahaan - perusahaan ternama Update', 'eskul-2021-03-02_18_03_08.jpg'),
+(2, 'Pramuka / Hisbul Wathan', 'eskul-2021-03-02_18_03_46.jpg'),
+(3, 'Palang Merah Remaja', 'eskul-2021-03-02_18_03_08.jpg'),
+(4, 'Tapak Suci', 'eskul-2021-03-02_18_03_08.jpg'),
+(5, 'Paskibraka', 'eskul-2021-03-02_18_03_08.jpg'),
+(6, 'Desain Grafis', 'eskul-2021-03-02_18_03_08.jpg'),
+(7, 'Musik', 'eskul-2021-03-02_18_03_08.jpg'),
+(8, 'Tahfidzul Quran', 'eskul-2021-03-02_18_03_08.jpg'),
+(9, 'English Club', 'eskul-2021-03-02_18_03_08.jpg'),
+(10, 'Panahan', 'eskul-2021-03-02_18_03_08.jpg'),
+(11, 'Kelas Wirausaha', 'eskul-2021-03-02_18_03_08.jpg'),
+(12, 'Motorcross', 'eskul-2021-03-02_18_03_08.jpg'),
+(13, 'Futsal', 'eskul-2021-03-02_18_03_08.jpg'),
+(15, 'test 1', 'eskul-2021-03-02_18_03_08.jpg'),
+(16, 'test 1', 'eskul-2021-03-02_18_03_08.jpg');
 
 -- --------------------------------------------------------
 
@@ -301,6 +375,43 @@ INSERT INTO `pengajar` (`id_pengajar`, `nip`, `nama_lengkap`, `username_login`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sarana_prasarana`
+--
+
+CREATE TABLE `sarana_prasarana` (
+  `id_prasara` int(11) NOT NULL,
+  `keterangan` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sarana_prasarana`
+--
+
+INSERT INTO `sarana_prasarana` (`id_prasara`, `keterangan`) VALUES
+(1, 'Ruang Kelas Nyaman berbasis multimedia dan LCD Proyektor'),
+(2, 'Lab. Akuntansi dan Keuangan Lembaga'),
+(3, 'Lab. Otomatisasi dan Tata Kelola Perkantoran'),
+(4, 'Lab. Teknik Komputer dan Jaringan'),
+(5, 'Lab. Fiber Optik Telkom'),
+(6, 'Lab. Multimedia'),
+(7, 'Lab. Bahasa'),
+(8, 'Lab. Kewirausahaan'),
+(9, 'Lab. Bengkel Otomotif TKRO'),
+(10, 'Lab. Bengkel Otomotif TBSM'),
+(11, 'Studio Musik'),
+(12, 'Bursa Kerja Khusus (BKK)'),
+(13, 'Fotocopy Center'),
+(14, 'Mini Market One Mart'),
+(15, 'Bank Surya Artha'),
+(16, 'Perpustakaan'),
+(17, 'Hotspot Area'),
+(18, 'Lapangan Olahraga'),
+(19, 'Unit Kesehatan Sekolah'),
+(20, 'Test 1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `siswa`
 --
 
@@ -444,6 +555,24 @@ ALTER TABLE `analisis_essay`
   ADD PRIMARY KEY (`id_analisis_essay`);
 
 --
+-- Indexes for table `bursa`
+--
+ALTER TABLE `bursa`
+  ADD PRIMARY KEY (`id_bursa`);
+
+--
+-- Indexes for table `bursa_pic`
+--
+ALTER TABLE `bursa_pic`
+  ADD PRIMARY KEY (`id_bursa_pic`);
+
+--
+-- Indexes for table `ekstrakul`
+--
+ALTER TABLE `ekstrakul`
+  ADD PRIMARY KEY (`id_eskul`);
+
+--
 -- Indexes for table `file_materi`
 --
 ALTER TABLE `file_materi`
@@ -490,6 +619,12 @@ ALTER TABLE `nilai`
 --
 ALTER TABLE `pengajar`
   ADD PRIMARY KEY (`id_pengajar`);
+
+--
+-- Indexes for table `sarana_prasarana`
+--
+ALTER TABLE `sarana_prasarana`
+  ADD PRIMARY KEY (`id_prasara`);
 
 --
 -- Indexes for table `siswa`
@@ -544,6 +679,24 @@ ALTER TABLE `analisis_essay`
   MODIFY `id_analisis_essay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `bursa`
+--
+ALTER TABLE `bursa`
+  MODIFY `id_bursa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `bursa_pic`
+--
+ALTER TABLE `bursa_pic`
+  MODIFY `id_bursa_pic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ekstrakul`
+--
+ALTER TABLE `ekstrakul`
+  MODIFY `id_eskul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT for table `file_materi`
 --
 ALTER TABLE `file_materi`
@@ -590,6 +743,12 @@ ALTER TABLE `nilai`
 --
 ALTER TABLE `pengajar`
   MODIFY `id_pengajar` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `sarana_prasarana`
+--
+ALTER TABLE `sarana_prasarana`
+  MODIFY `id_prasara` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `siswa`

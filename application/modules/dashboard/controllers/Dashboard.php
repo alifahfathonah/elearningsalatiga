@@ -1212,7 +1212,7 @@ class Dashboard extends CI_Controller
         }
     }
 
-    // Sarana Pra Sarana
+    // Sarana Prasarana
     public function sarpra()
     {
         $data 	        = [
@@ -1331,6 +1331,348 @@ class Dashboard extends CI_Controller
                 $this->toastr->success('Sukses Menghapus Data Sarana Prasarana !!!');
 
                 redirect('dashboard/sarpra', 'refresh');
+            }
+        }
+    }
+
+    // Cetak Data Sarana Prasarana
+    public function cetakSrapraDetail()
+    {
+        $data       = [
+            'sarpra'     => $this->Dashboard->viewAll('*', 'sarana_prasarana')->result_array()
+        ];
+
+        $this->load->view('cetakSaranaPrasarana', $data);
+    }
+
+    // Sarana Ekstrakulikuler
+    public function eksul()
+    {
+        $data 	        = [
+            'titles'	    => 'Dashboard Administrator || View Ekstra Kulikuler',
+            'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+            'iconbread'     => 'fa fa-home',
+            'breadcumb'     => ucwords($this->uri->segment('1')),
+            'subbread'      => 'Ekstra Kulikuler',
+            'view'		    => "v_Eskul"
+        ];
+
+        $this->load->view("index", $data);
+    }
+
+    // Json View Datatable Data jsonAdministrator
+    public function jsonEskul()
+    {
+        header('Content-Type: application/json');
+        echo $this->Dashboard->json(
+            '*',
+            'ekstrakul'
+        );
+    }
+
+    public function addEskul()
+    {
+        $data 	        = [
+            'titles'	    => 'Dashboard Administrator || Add Ekstra Kulikuler Pages',
+            'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+            'iconbread'     => 'fa fa-home',
+            'breadcumb'     => ucwords($this->uri->segment('1')),
+            'subbread'      => 'Ekstra Kulikuler',
+            'view'		    => "v_addEskul"
+        ];
+
+        $this->load->view("index", $data);
+    }
+
+    // Action Add Action Ekstra Kulikuler
+    public function actionAddEskul()
+    {
+        $this->form_validation->set_rules('keterangan', 'Keterangan Sarapa Prasarana', 'trim|required');
+        $this->form_validation->set_error_delimiters('<div class="text-danger"><i class="fa fa-info-circle"></i> ', '</div>');
+
+        // Validation
+        if ($this->form_validation->run() == false) {
+            $data 	        = [
+                'titles'	    => 'Dashboard Administrator || View Ekstra Kulikuler',
+                'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'subbread'      => 'Ekstra Kulikuler',
+                'view'		    => "v_Eskul"
+            ];
+    
+            $this->load->view("index", $data);
+        } else {
+            $images         = $_FILES['images'];
+
+            if($images['name']==''){
+                $insertEskul    = [
+                    'keterangan'     => htmlentities($this->input->post('keterangan'))
+                ];
+                // Insert To Database
+                if ($this->Dashboard->insert('ekstrakul', $insertEskul)) {
+                    // Jika Sukses Insert
+                    $this->toastr->success('Sukses Menyimpan Data Ekstra Kulikuler !!!');
+
+                    redirect('dashboard/eksul', 'refresh');
+                } else {
+                    // Jika Gagal Insert
+                    $this->toastr->error('Data Tidak Valid !!!');
+                    redirect('dashboard/addEskul', 'refresh');
+                }
+            }else{
+                $config['upload_path'] 		= './frontend/assets/images/eskul/';
+                $config['allowed_types'] 	= 'jpg|png|jpeg';
+                $config['max_size'] 		= 2048;
+                $config['file_name'] 		= 'eskul-'. date('Y-m-d H_m_s');
+                $this->upload->initialize($config);
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('images')) {
+                    $this->toastr->error('Upload Foto Gagal, Pastikan file dibawah 2Mb dan Berformat jpg,png,img. !!!');
+                } else {
+                    $insertEskul    = [
+                        'keterangan'        => htmlentities($this->input->post('keterangan')),
+                        'file'              => $this->upload->data('file_name'),
+                    ];
+                    // Insert To Database
+                    if ($this->Dashboard->insert('ekstrakul', $insertEskul)) {
+                        // Jika Sukses Insert
+                        $this->toastr->success('Sukses Menyimpan Data Ekstra Kulikuler !!!');
+    
+                        redirect('dashboard/eksul', 'refresh');
+                    } else {
+                        // Jika Gagal Insert
+                        $this->toastr->error('Data Tidak Valid !!!');
+                        redirect('dashboard/addEskul', 'refresh');
+                    }
+                }
+            }
+        }
+    }
+
+    // Edit Data Ekstra Kulikuler
+    public function editDataEskul($id=0)
+    {
+        if ($id!=0) {
+            $data 	        = [
+                'titles'	    => 'Dashboard Administrator || Edit Ekstra Kulikuler Pages',
+                'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+                'eskul'         => $this->Dashboard->viewWhere('ekstrakul','id_eskul',$id)->result_array(),
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'subbread'      => 'Edit Data Ekstra Kulikuler',
+                'view'		    => "v_editEskul"
+            ];
+
+            $this->load->view("index", $data);
+        }
+    }
+
+    // Action Edit Ekstra Kulikuler
+    public function actionEditEskul($id=0)
+    {
+        if($id!=0){
+            $images         = $_FILES['images'];
+    
+            if($images['name']==''){
+                $updateEskul    = [
+                    'keterangan'     => htmlentities($this->input->post('keterangan'))
+                ];
+                // Action Update To Database
+                if ($this->Dashboard->update('ekstrakul', 'id_eskul', $id, $updateEskul)) {
+                    // Jika Sukses Insert
+                    $this->toastr->success('Sukses Mengubah Data Ekstra Kulikuler !!!');
+                }
+                redirect('dashboard/eksul','refresh');
+            }else{
+                $config['upload_path'] 		= './frontend/assets/images/eskul/';
+                $config['allowed_types'] 	= 'jpg|png|jpeg';
+                $config['max_size'] 		= 2048;
+                $config['file_name'] 		= 'eskul-'. date('Y-m-d H_m_s');
+                $this->upload->initialize($config);
+                $this->load->library('upload', $config);
+    
+                if (!$this->upload->do_upload('images')) {
+                    $this->toastr->error('Upload Foto Gagal, Pastikan file dibawah 2Mb dan Berformat jpg,png,img. !!!');
+                } else {
+                    $updateEskul    = [
+                        'keterangan'        => htmlentities($this->input->post('keterangan')),
+                        'file'              => $this->upload->data('file_name'),
+                    ];
+    
+                     // Action Update To Database
+                    if ($this->Dashboard->update('ekstrakul', 'id_eskul', $id, $updateEskul)) {
+                        // Jika Sukses Insert
+                        $this->toastr->success('Sukses Mengubah Data Ekstra Kulikuler !!!');
+                    }
+                }
+                redirect('dashboard/eksul','refresh');
+            }
+        }
+    }
+
+    // Hapus Data Ekstra Kulikuler
+    public function deleteDataEskul($id=0)
+    {
+        if ($id!=0) {
+            if ($this->Dashboard->delete('id_eskul', 'ekstrakul', $id)) {
+                $this->toastr->success('Sukses Menghapus Data Ekstra Kulikuler !!!');
+
+                redirect('dashboard/eksul', 'refresh');
+            }
+        }
+    }
+
+    // Cetak Data Ekstra Kulikuler
+    public function cetakEskulDetail()
+    {
+        $data       = [
+            'eskul'     => $this->Dashboard->viewAll('*', 'ekstrakul')->result_array()
+        ];
+
+        $this->load->view('cetakEskul', $data);
+    }
+
+    // Bursa Kerja
+    public function bursa()
+    {
+        $data 	        = [
+            'titles'	    => 'Dashboard Administrator || View Bursa Kerja',
+            'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+            'iconbread'     => 'fa fa-home',
+            'breadcumb'     => ucwords($this->uri->segment('1')),
+            'subbread'      => 'Bursa Kerja',
+            'view'		    => "v_Bursa"
+        ];
+
+        $this->load->view("index", $data);
+    }
+
+    // Json View Datatable Data jsonBursaKerja
+    public function jsonBursa()
+    {
+        header('Content-Type: application/json');
+        echo $this->Dashboard->json(
+            '*',
+            'bursa'
+        );
+    }
+
+    // Edit Data Bursa Kerja
+    public function editDataBursa($id=0)
+    {
+        if ($id!=0) {
+            $data 	        = [
+                'titles'	    => 'Dashboard Administrator || Edit Bursa Kerja Pages',
+                'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+                'bursa'         => $this->Dashboard->viewWhere('bursa','id_bursa',$id)->result_array(),
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'subbread'      => 'Edit Data Bursa Kerja',
+                'view'		    => "v_editBursa"
+            ];
+
+            $this->load->view("index", $data);
+        }
+    }
+
+    // Action Edit Bursa Kerja
+    public function actionEditBursa($id=0)
+    {
+        $updateEskul    = [
+            'keterangan'     => htmlentities($this->input->post('keterangan'))
+        ];
+        // Action Update To Database
+        if ($this->Dashboard->update('bursa', 'id_bursa', $id, $updateEskul)) {
+            // Jika Sukses Insert
+            $this->toastr->success('Sukses Mengubah Data Bursa Kerja !!!');
+        }
+        redirect('dashboard/bursa','refresh');
+    }
+
+    // Bursa Kerja Picture Detail Picture Detail
+    public function viewBursaPic()
+    {
+        $data 	        = [
+            'titles'	    => 'Dashboard Administrator || View Bursa Kerja Picture Detail',
+            'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+            'iconbread'     => 'fa fa-home',
+            'breadcumb'     => ucwords($this->uri->segment('1')),
+            'subbread'      => 'Bursa Kerja Picture Detail',
+            'view'		    => "v_BursaPicture"
+        ];
+
+        $this->load->view("index", $data);
+    }
+
+    // Json View Datatable Data jsonBursaKerja Picture Detail
+    public function jsonBursaPic()
+    {
+        header('Content-Type: application/json');
+        echo $this->Dashboard->json(
+            '*',
+            'bursa_pic'
+        );
+    }
+
+    // Edit Data Bursa Kerja Picture
+    public function editDataBursaPic($id=0)
+    {
+        if ($id!=0) {
+            $data 	        = [
+                'titles'	    => 'Dashboard Administrator || Edit Bursa Kerja Picture Pages',
+                'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+                'bursaPic'      => $this->Dashboard->viewWhere('bursa_pic','id_bursa_pic',$id)->result_array(),
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'subbread'      => 'Edit Data Bursa Kerja Picture',
+                'view'		    => "v_editBursaPicture"
+            ];
+
+            $this->load->view("index", $data);
+        }
+    }
+
+    // Action Edit Ekstra Kulikuler Picture
+    public function actionEditBursaPic($id=0)
+    {
+        if($id!=0){
+            $images         = $_FILES['imagesEdit'];
+    
+            if($images['name']==''){
+                $updateBursa    = [
+                    'keterangan'     => htmlentities($this->input->post('keterangan'))
+                ];
+                // Action Update To Database
+                if ($this->Dashboard->update('bursa_pic', 'id_bursa_pic', $id, $updateBursa)) {
+                    // Jika Sukses Insert
+                    $this->toastr->success('Sukses Mengubah Data Bursa Kerja Picture !!!');
+                }
+                redirect('dashboard/viewBursaPic/1','refresh');
+            }else{
+                $config['upload_path'] 		= './frontend/assets/images/bursa/';
+                $config['allowed_types'] 	= 'jpg|png|jpeg';
+                $config['max_size'] 		= 2048;
+                $config['file_name'] 		= 'eskul-'. date('Y-m-d H_m_s');
+                $this->upload->initialize($config);
+                $this->load->library('upload', $config);
+    
+                if (!$this->upload->do_upload('imagesEdit')) {
+                    $this->toastr->error('Upload Foto Gagal, Pastikan file dibawah 2Mb dan Berformat jpg,png,img. !!!');
+                } else {
+                    $updateBursa    = [
+                        'keterangan'        => htmlentities($this->input->post('keterangan')),
+                        'file'              => $this->upload->data('file_name'),
+                    ];
+    
+                     // Action Update To Database
+                    if ($this->Dashboard->update('bursa_pic', 'id_bursa_pic', $id, $updateBursa)) {
+                        // Jika Sukses Insert
+                        $this->toastr->success('Sukses Mengubah Data Bursa Kerja Picture !!!');
+                    }
+                }
+                redirect('dashboard/viewBursaPic/1','refresh');
             }
         }
     }

@@ -14,3 +14,5 @@ Database Name 	      : elearning
 ~ topik_quiz          : id_tq|judul|id_kelas|id_mata_pelajaran|tgl_buat|pembuat|waktu_pengerjaan|info|terbit
 ~ sarana_prasarana    : id_prasara|keterangan
 ~ ekstrakul           : id_eskul|keterangan|file
+~ bursa               : id_bursa|keterangan|id_bursa_pic
+~ bursa_pic           : id_bursa_pic|keterangan|file
