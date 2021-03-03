@@ -50,5 +50,10 @@
 							</div>
 							<!-- View Nilai Siswa End -->
 						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<a href="<?= base_url('Home/downloadSertifikat/'.$nilai[0]['id_nilai']);?>" class="btn btn-info btn-sm"> Download Sertifikat</a>
+							</div>
+						</div>
 					</div>
 					</div>

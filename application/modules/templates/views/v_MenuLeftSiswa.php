@@ -1,3 +1,4 @@
+<?php defined('BASEPATH') or exit('No direct script access allowed');?>
 		<style>
 			hr{
 				border:solid;
@@ -35,6 +36,7 @@
 								<li class="list-group-item"><a href="<?= base_url('home/materi');?>"> Materi</a></li>
 								<li class="list-group-item"><a href="<?= base_url('home/quis');?>"> Quiz</a></li>
 								<li class="list-group-item"><a href="<?= base_url('home/nilai');?>"> Nilai</a></li>
+								<li class="list-group-item"><a href="<?= base_url('home/testimoni');?>"> Testimoni</a></li>
 							</ul>
 						</div>
 						

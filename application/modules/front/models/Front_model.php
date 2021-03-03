@@ -14,6 +14,18 @@ class Front_model extends CI_Model
     }
 
     // Global View dengan $tbl sebagai nama tabel nya
+    public function viewAlllIMIT($select, $tbl,$data,$sort,$limit)
+    {
+        $this->db->select($select);
+        $this->db->from($tbl);
+        $this->db->order_by($data,$sort);
+        $this->db->limit($limit);
+        $query  = $this->db->get();
+
+        return $query;
+    }
+
+    // Global View dengan $tbl sebagai nama tabel nya
     public function viewAllOrderBy($select, $tbl, $where)
     {
         $this->db->select($select);

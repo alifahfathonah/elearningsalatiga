@@ -1677,5 +1677,126 @@ class Dashboard extends CI_Controller
         }
     }
 
+    // Mitra Bursa Kerja
+    public function mitrabkk()
+    {
+        $data 	        = [
+            'titles'	    => 'Dashboard Administrator || View Mitra Bursa Kerja',
+            'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+            'iconbread'     => 'fa fa-home',
+            'breadcumb'     => ucwords($this->uri->segment('1')),
+            'subbread'      => 'Mitra Bursa Kerja',
+            'view'		    => "v_MitraBursa"
+        ];
+
+        $this->load->view("index", $data);
+    }
+
+    // Json View Datatable Data jsonBursaKerja
+    public function jsonMitraBursa()
+    {
+        header('Content-Type: application/json');
+        echo $this->Dashboard->json(
+            '*',
+            'mitrabkk'
+        );
+    }
+
+    // Tambah Data Mitra Bursa Kerja
+    public function addMitraBkk()
+    {
+        $data 	        = [
+            'titles'	    => 'Dashboard Administrator || Add Mitra BKK Pages',
+            'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+            'iconbread'     => 'fa fa-home',
+            'breadcumb'     => ucwords($this->uri->segment('1')),
+            'subbread'      => 'Add Mitra BKK',
+            'view'		    => "v_addMitraBKK"
+        ];
+
+        $this->load->view("index", $data);
+    }
+
+    // Action Add Administrator
+    public function actionAddMitraBKK()
+    {
+        $this->form_validation->set_rules('nama_mitra', 'Nama Mitra', 'trim|is_unique[admin.username]|required');
+        $this->form_validation->set_error_delimiters('<div class="text-danger"><i class="fa fa-info-circle"></i> ', '</div>');
+
+        if ($this->form_validation->run() == false) {
+            $data 	        = [
+                'titles'	    => 'Dashboard Administrator || View Mitra Bursa Kerja',
+                'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'subbread'      => 'Mitra Bursa Kerja',
+                'view'		    => "v_MitraBursa"
+            ];
+    
+            $this->load->view("index", $data);
+        } else {
+            $insertMitraBKK            = [
+                'nama_mitra'        => htmlentities($this->input->post('nama_mitra'))
+            ];
+
+            // Action Insert To Database
+            if ($this->Dashboard->insert('mitrabkk', $insertMitraBKK)) {
+                // Jika Sukses Insert
+                $this->toastr->success('Sukses Menyimpan Data Mitra BKK !!!');
+
+                redirect('dashboard/mitrabkk', 'refresh');
+            } else {
+                // Jika Gagal Insert
+                $this->toastr->error('Ada Data Yang Belum Lengkap !!!');
+
+                redirect('dashboard/addMitraBkk', 'refresh');
+            }
+        }
+    }
+
+    // Edit Data Mitra BKK
+    public function editDataMitraBKK($id=0)
+    {
+        if ($id!=0) {
+            $data 	        = [
+                'titles'	    => 'Dashboard Administrator || View Detail Mitra Bursa Kerja Pages',
+                'user'          => $this->Dashboard->viewWhere('admin', 'id_admin', $this->session->userdata('id'))->result_array(),
+                'mitra'         => $this->Dashboard->viewWhere('mitrabkk', 'id_mitra', $id)->result_array(),
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'subbread'      => 'View Detail Mitra Bursa Kerja',
+                'view'		    => "v_editMitraBKK"
+            ];
+
+            $this->load->view("index", $data);
+        }
+    }
+
+    // Action Edit Administrator
+    public function actionEditMitra($id=0)
+    {
+        $updateMitra = [
+            'nama_mitra'        => htmlentities($this->input->post('nama_mitraEdit'))
+        ];
+
+        // Action Update To Database
+        if ($this->Dashboard->update('mitrabkk', 'id_mitra', $id, $updateMitra)) {
+            $this->toastr->success('Sukses Mengubah Data Mitra BKK !!!');
+            redirect('dashboard/mitrabkk', 'refresh');
+        }
+    }
+
+    // Hapus Data Mitra BKK Detail
+    public function deleteDataMitraBKK($id=0)
+    {
+        if ($id!=0) {
+            if ($this->Dashboard->delete('id_mitra', 'mitrabkk', $id)) {
+                $this->toastr->success('Sukses Menghapus Detail Data Mitra BKK !!!');
+
+                redirect('dashboard/mitrabkk', 'refresh');
+            }
+        }
+    }
+
     // QUICK LINK END   //
 }

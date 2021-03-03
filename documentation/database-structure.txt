@@ -16,3 +16,5 @@ Database Name 	      : elearning
 ~ ekstrakul           : id_eskul|keterangan|file
 ~ bursa               : id_bursa|keterangan|id_bursa_pic
 ~ bursa_pic           : id_bursa_pic|keterangan|file
+~ testimoni           : id_testi|id_siswa|judul|konten
+~ mitrabkk            : id_mitra|nama_mitra

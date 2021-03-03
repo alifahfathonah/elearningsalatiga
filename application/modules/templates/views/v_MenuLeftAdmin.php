@@ -34,6 +34,7 @@
 								<li class="list-group-item"><a href="<?= base_url('dashboard/sarpra');?>"> Data Sarana Prasarana</a></li>
 								<li class="list-group-item"><a href="<?= base_url('dashboard/eksul');?>"> Data Ekstrakulikuler</a></li>
 								<li class="list-group-item"><a href="<?= base_url('dashboard/bursa');?>"> Data Bursa Kerja</a></li>
+								<li class="list-group-item"><a href="<?= base_url('dashboard/mitrabkk');?>"> Data Mitra BKK</a></li>
 							</ul>
 						</div>
 						

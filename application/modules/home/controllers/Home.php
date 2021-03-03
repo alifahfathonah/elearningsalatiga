@@ -493,7 +493,7 @@ class Home extends CI_Controller
                 $join1
             )->result_array(),
             'topik'         => $this->Dashboard->viewGlobalJoinWhere(
-                'topik_quiz.id_tq AS id_tq,
+                    'topik_quiz.id_tq AS id_tq,
                     topik_quiz.judul AS judul,
                     kelas.keterangan AS nama_kelas,
                     master_pelajaran.mapel AS mapel,
@@ -513,6 +513,95 @@ class Home extends CI_Controller
         ];
         
             $this->load->view("index", $data);
+        }
+    }
+
+    // View Testimoni
+    public function testimoni()
+    {
+        $cekSiswa           = $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array();
+        $data 	            = [
+            'titles'	    => 'Dashboard Siswa || View Testimoni Pages',
+            'iconbread'     => 'fa fa-home',
+            'breadcumb'     => ucwords($this->uri->segment('1')),
+            'pagination'    => $this->pagination->create_links(),
+            'subbread'      => 'Add Testimoni',
+            'view'		    => "v_addTesti"
+        ];
+
+        $this->load->view("index", $data);
+    }
+
+    // Action Add Testimoni
+    public function actionAddTestimoni()
+    {
+        $this->form_validation->set_rules('testimoni', 'Testimoni', 'trim|required');
+        $this->form_validation->set_error_delimiters('<div class="text-danger"><i class="fa fa-info-circle"></i> ', '</div>');
+
+        // Validation
+        if ($this->form_validation->run() == false) {
+            $cekSiswa           = $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array();
+            $data 	            = [
+                'titles'	    => 'Dashboard Siswa || View Testimoni Pages',
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'pagination'    => $this->pagination->create_links(),
+                'subbread'      => 'Add Testimoni',
+                'view'		    => "v_addTesti"
+            ];
+
+            $this->load->view("index", $data);
+        } else {
+            $insertTesti = [
+                'id_siswa'      => $this->session->userdata('id_siswa'),
+                'judul'         => htmlentities($this->input->post('judul')),
+                'konten'        => htmlentities($this->input->post('testimoni'))
+            ];
+            
+            // Insert To Database
+            if ($this->Dashboard->insert('testimoni', $insertTesti)) {
+                // Jika Sukses Insert
+                $this->toastr->success('Sukses Menyimpan Testimoni !!!');
+
+                redirect('home/testimoni', 'refresh');
+            } else {
+                // Jika Gagal Insert
+                $this->toastr->error('Data Tidak Valid !!!');
+
+                redirect('home/testimoni', 'refresh');
+            }
+        }
+    }
+
+    // Download Sertifikat
+    public function downloadSertifikat($id=0)
+    {
+        if($id!=0){
+            // Cek Nilai Berdasar ID
+            $join           = array(
+                                ['siswa','nilai.id_siswa=siswa.id_siswa','LEFT']
+                            );
+            $data 	            = [
+                'titles'	    => 'Sertifikat',
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'cekNilai'      => $this->Dashboard->viewGlobalJoinWhere(
+                    '
+                        nilai.id_nilai AS id_nilai,
+                        siswa.nama_lengkap AS nama_lengkap,
+                        siswa.alamat AS alamat,
+                        siswa.nis AS nis,
+                        nilai.nilai AS nilai
+                    ',
+                    'nilai',
+                    ['id_nilai' => $id],
+                    $join)->result_array(),
+                'subbread'      => 'Add Testimoni'
+                // 'view'		    => "v_viewSertif"
+            ];
+
+            // $this->load->view("index", $data);
+            $this->load->view("v_viewSertif", $data);
         }
     }
 }

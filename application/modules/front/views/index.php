@@ -3,7 +3,7 @@
 $this->load->view('templates/v_Header');
 
 // Sidebar
-$this->load->view('templates/v_MenuLeft');
+$this->load->view('templates/v_MenuBar');
 
 // Content View
 $this->load->view($view);
