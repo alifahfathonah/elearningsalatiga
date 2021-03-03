@@ -88,7 +88,7 @@
 </body>
 <script>
 function redirect(){
-    window.location.href = "../../listcustomer";
+    window.location.href = "../../home";
 }
 </script>
 </html>
