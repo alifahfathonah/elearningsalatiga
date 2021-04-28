@@ -67,9 +67,9 @@ $(document).ready(function() {
             {
                 data: "tgl_buat",
                 className: "text-center",
-                render: function(data, type, full) {
-                    return moment(data).format("DD MMMM YYYY");
-                },
+                // render: function(data, type, full) {
+                //     return moment(data).format("DD MMMM YYYY");
+                // },
             },
             {
                 data: "waktu_mengerjakan",

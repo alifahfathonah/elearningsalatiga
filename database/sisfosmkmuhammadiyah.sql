@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2021 at 02:00 PM
+-- Generation Time: Mar 29, 2021 at 03:50 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -171,7 +171,7 @@ CREATE TABLE `ekstrakul` (
 --
 
 INSERT INTO `ekstrakul` (`id_eskul`, `keterangan`, `file`) VALUES
-(1, 'Adalah Lembaga yang menjalankan fungsi mempertemukan / memfasilitasi pertemuan antara pencari kerja dengan pengguna tenaga kerja untuk ditempatkan melalui sistem antar kerja. BKK SMK Muhammadiyah 1 Purbalingga memfasilitasi lulusan baik dari sekolah lain untuk ditempatkan di perusahaan - perusahaan ternama Update', 'eskul-2021-03-02_18_03_08.jpg'),
+(1, 'Ikatan Pelajar Muhammadiyah', 'eskul-2021-03-02_18_03_08.jpg'),
 (2, 'Pramuka / Hisbul Wathan', 'eskul-2021-03-02_18_03_46.jpg'),
 (3, 'Palang Merah Remaja', 'eskul-2021-03-02_18_03_08.jpg'),
 (4, 'Tapak Suci', 'eskul-2021-03-02_18_03_08.jpg'),
@@ -183,9 +183,7 @@ INSERT INTO `ekstrakul` (`id_eskul`, `keterangan`, `file`) VALUES
 (10, 'Panahan', 'eskul-2021-03-02_18_03_08.jpg'),
 (11, 'Kelas Wirausaha', 'eskul-2021-03-02_18_03_08.jpg'),
 (12, 'Motorcross', 'eskul-2021-03-02_18_03_08.jpg'),
-(13, 'Futsal', 'eskul-2021-03-02_18_03_08.jpg'),
-(15, 'test 1', 'eskul-2021-03-02_18_03_08.jpg'),
-(16, 'test 1', 'eskul-2021-03-02_18_03_08.jpg');
+(13, 'Futsal', 'eskul-2021-03-02_18_03_08.jpg');
 
 -- --------------------------------------------------------
 
@@ -313,6 +311,36 @@ CREATE TABLE `mengajar` (
 
 INSERT INTO `mengajar` (`id_mengajar`, `nama`, `id_pengajar`, `id_kelas`, `deskripsi`) VALUES
 (1, '4', 1, 1, 'Mengajar Dari Jam 08.00 - 09.30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mitrabkk`
+--
+
+CREATE TABLE `mitrabkk` (
+  `id_mitra` int(11) NOT NULL,
+  `nama_mitra` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mitrabkk`
+--
+
+INSERT INTO `mitrabkk` (`id_mitra`, `nama_mitra`) VALUES
+(1, 'PT HONDA PROSPECT MOTOR (PT. HPM)'),
+(2, 'PT. ASTRA HONDA MOTOR'),
+(3, 'PT. SUZUKI SMG SUNTER'),
+(4, 'PT. YAMAHA INDONESIA MANUFACTURING'),
+(5, 'PT. OSHUNG CIKARANG '),
+(6, 'PT. LG INNOTECT'),
+(7, 'PT. OPPO TANGERANG'),
+(8, 'PT. PRAKASA ALAM SEGAR'),
+(9, 'PT. ASABA CKRNG'),
+(10, 'PT. SHOPEE SUNTER'),
+(11, 'PT. VIVO TANGERANG'),
+(12, 'PT. EPSON CIKARANG'),
+(13, 'PT. CHEMCO');
 
 -- --------------------------------------------------------
 
@@ -503,6 +531,28 @@ INSERT INTO `soal_essay` (`id_soal_essay`, `id_tq`, `isi_soal`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `testimoni`
+--
+
+CREATE TABLE `testimoni` (
+  `id_testi` int(11) NOT NULL,
+  `id_siswa` int(11) DEFAULT NULL,
+  `judul` varchar(128) DEFAULT NULL,
+  `konten` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `testimoni`
+--
+
+INSERT INTO `testimoni` (`id_testi`, `id_siswa`, `judul`, `konten`) VALUES
+(1, 1, 'Semangat', 'Oke Oce Sip GPP Gua Ganteng Kok'),
+(2, 2, 'Semangat Aja Ya', 'Oke Oce Sip GPP Gua Ganteng Kok Ngikut Atas'),
+(3, 1, 'SMK Oke', 'Oke Oce Deh');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `topik_quiz`
 --
 
@@ -609,6 +659,12 @@ ALTER TABLE `mengajar`
   ADD PRIMARY KEY (`id_mengajar`);
 
 --
+-- Indexes for table `mitrabkk`
+--
+ALTER TABLE `mitrabkk`
+  ADD PRIMARY KEY (`id_mitra`);
+
+--
 -- Indexes for table `nilai`
 --
 ALTER TABLE `nilai`
@@ -643,6 +699,12 @@ ALTER TABLE `soal`
 --
 ALTER TABLE `soal_essay`
   ADD PRIMARY KEY (`id_soal_essay`);
+
+--
+-- Indexes for table `testimoni`
+--
+ALTER TABLE `testimoni`
+  ADD PRIMARY KEY (`id_testi`);
 
 --
 -- Indexes for table `topik_quiz`
@@ -733,6 +795,12 @@ ALTER TABLE `mengajar`
   MODIFY `id_mengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `mitrabkk`
+--
+ALTER TABLE `mitrabkk`
+  MODIFY `id_mitra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
@@ -767,6 +835,12 @@ ALTER TABLE `soal`
 --
 ALTER TABLE `soal_essay`
   MODIFY `id_soal_essay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `testimoni`
+--
+ALTER TABLE `testimoni`
+  MODIFY `id_testi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `topik_quiz`

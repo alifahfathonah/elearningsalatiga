@@ -49,7 +49,6 @@ $(document).ready(function() {
                 data: "id_siswa",
                 className: "text-center",
                 orderable: false,
-
             },
             {
                 data: "nis",
@@ -74,9 +73,9 @@ $(document).ready(function() {
             {
                 data: "tgl_lahir",
                 className: "text-center",
-                render: function(data, type, full) {
-                    return moment(data).format("DD MMMM YYYY");
-                },
+                // render: function(data, type, full) {
+                //     return moment(data).format("DD MMMM YYYY");
+                // },
             },
             {
                 data: "jenis_kelamin",

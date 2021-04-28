@@ -27,6 +27,7 @@ class Pengajar extends CI_Controller
 
         $data 	        = [
             'titles'	    => 'Dashboard Pengajar || Dashboard Pages',
+            'user'          => $this->Dashboard->viewWhere('pengajar', 'id_pengajar', $this->session->userdata('id'))->result_array(),
             'pengajar'      => $this->Dashboard->viewGlobalJoinWhere(
                 'pengajar.id_pengajar AS id_pengajar,
                 pengajar.nip AS nip,
@@ -120,44 +121,44 @@ class Pengajar extends CI_Controller
     // Action Edit Pengajar
     public function actionEditPengajar($id=0)
     {
-        $pisahTanggal   = explode(" ", htmlentities($this->input->post('tgl_lahir')));
-        $tgl_lahir      = $pisahTanggal[2].'-'.getConvertBulan($pisahTanggal[1]).'-'.$pisahTanggal[0];
+        if($id!=0){
+            $pisahTanggal   = explode(" ", htmlentities($this->input->post('tgl_lahir')));
+            $tgl_lahir      = $pisahTanggal[2].'-'.getConvertBulan($pisahTanggal[1]).'-'.$pisahTanggal[0];
                 
-        // Cek Data Pengajar Berdasar ID
-        $cekPengajar    = $this->Dashboard->viewWhere('pengajar', 'id_pengajar', $this->session->userdata('id'))->result_array();
-        if ($this->input->post('password')=='') {
-            $password   = $cekPengajar[0]['password_login'];
-        } else {
-            $password   = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
-        }
-    
-        // Jika Foto Kosong Update Hanya Data Saja
-        $foto 	  = $_FILES['images'];
-        if ($foto[0]['name'] = '') {
-            // Update Hanya Data Saja
-            $updatePengajar    = [
-                'nama_lengkap'      => htmlentities($this->input->post('nama_lengkap')),
-                'password_login'    => $password,
-                'alamat'            => htmlentities($this->input->post('alamat')),
-                'tempat_lahir'      => htmlentities($this->input->post('tempat_lahir')),
-                'tgl_lahir'         => $tgl_lahir,
-                'jenis_kelamin'     => htmlentities($this->input->post('jenkel')),
-                'agama'             => htmlentities($this->input->post('agama')),
-                'email'             => htmlentities($this->input->post('email')),
-                'no_telp'           => htmlentities($this->input->post('no_telp'))
-            ];
-        } else {
-            $config['upload_path'] 		= './frontend/assets/images/users/pengajar/';
-            $config['allowed_types'] 	= 'jpg|png|jpeg';
-            $config['max_size'] 		= 2048;
-            $config['file_name'] 		= 'Pengajar-'.htmlentities($this->input->post('nama_lengkap')).'-' . date('Y-m-d H_m_s');
-            $this->upload->initialize($config);
-            $this->load->library('upload', $config);
-    
-            if (!$this->upload->do_upload('images')) {
-                $this->toastr->success('Upload Foto Gagal, Pastikan file dibawah 2Mb dan Berformat jpg,png,img. !!!');
+            // Cek Data Pengajar Berdasar ID
+            $cekPengajar    = $this->Dashboard->viewWhere('pengajar', 'id_pengajar', $this->session->userdata('id'))->result_array();
+            if ($this->input->post('password')=='') {
+                $password   = $cekPengajar[0]['password_login'];
             } else {
+                $password   = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
+            }
+
+            $foto 	  = $_FILES['images'];
+            if ($foto['name'] === '') {
+                // Update Hanya Data Saja
                 $updatePengajar    = [
+                    'nama_lengkap'      => htmlentities($this->input->post('nama_lengkap')),
+                    'password_login'    => $password,
+                    'alamat'            => htmlentities($this->input->post('alamat')),
+                    'tempat_lahir'      => htmlentities($this->input->post('tempat_lahir')),
+                    'tgl_lahir'         => $tgl_lahir,
+                    'jenis_kelamin'     => htmlentities($this->input->post('jenkel')),
+                    'agama'             => htmlentities($this->input->post('agama')),
+                    'email'             => htmlentities($this->input->post('email')),
+                    'no_telp'           => htmlentities($this->input->post('no_telp'))
+                ];
+            }else{
+                $config['upload_path'] 		= './frontend/assets/images/users/pengajar/';
+                $config['allowed_types'] 	= 'jpg|png|jpeg';
+                $config['max_size'] 		= 2048;
+                $config['file_name'] 		= 'Pengajar-'.htmlentities($this->input->post('nama_lengkap')).'-' . date('Y-m-d H_m_s');
+                $this->upload->initialize($config);
+                $this->load->library('upload', $config);
+        
+                if (!$this->upload->do_upload('images')) {
+                    $this->toastr->success('Upload Foto Gagal, Pastikan file dibawah 2Mb dan Berformat jpg,png,img. !!!');
+                } else {
+                    $updatePengajar    = [
                         'nama_lengkap'      => htmlentities($this->input->post('nama_lengkap')),
                         'password_login'    => $password,
                         'alamat'            => htmlentities($this->input->post('alamat')),
@@ -169,10 +170,10 @@ class Pengajar extends CI_Controller
                         'no_telp'           => htmlentities($this->input->post('no_telp')),
                         'foto'              => $this->upload->data('file_name')
                     ];
+                }
             }
             // Action Update To Database
             if ($this->Dashboard->update('pengajar', 'id_pengajar', $this->session->userdata('id'), $updatePengajar)) {
-    
                 // Jika Sukses Insert
                 $this->toastr->success('Sukses Mengubah Data Pengajar !!!');
     
@@ -181,7 +182,7 @@ class Pengajar extends CI_Controller
                 // Jika Gagal Insert
                 $this->toastr->error('Ada Data Yang Belum Lengkap !!!');
     
-                redirect('editProfilePengajar', 'refresh');
+                redirect('pengajar/editProfilePengajar/'.$this->session->userdata('id'), 'refresh');
             }
         }
     }
@@ -218,6 +219,7 @@ class Pengajar extends CI_Controller
         $kelas          = $this->Dashboard->viewWhere('kelas_detail', 'wali_kelas', $this->session->userdata('id'))->result_array() ;
         $data 	        = [
             'titles'	    => 'Dashboard Pengajar || View Kelas Detail Pages',
+            'user'          => $this->Dashboard->viewWhere('pengajar', 'id_pengajar', $this->session->userdata('id'))->result_array(),
             'pengajar'      => $this->Dashboard->viewWhere('pengajar', 'id_pengajar', $this->session->userdata('id'))->result_array(),
             'siswaDet'      => $this->Dashboard->viewWhere('siswa', 'id_kelas', $kelas[0]['wali_kelas'])->result_array(),
             'kelasDet'      => $this->Dashboard->viewGlobalJoinWhere('kelas_detail.*,kelas.keterangan AS nama_kelas', 'kelas_detail', [ 'wali_kelas' => $this->session->userdata('id')], $join)->result_array(),

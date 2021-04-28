@@ -53,7 +53,6 @@ $(document).ready(function() {
                 data: "id_kelas_detail",
                 className: "text-center",
                 orderable: false,
-
             },
             {
                 data: "nama_kelas",
@@ -74,7 +73,8 @@ $(document).ready(function() {
                 className: "text-center",
                 render: function(id_kelas_detail, type, full, meta) {
                     return (
-                        '<a href="editDataDetailKelas/' + id_kelas_detail + '">Edit</a> | <a href="viewDetailDataKelas"> Lihat</a>'
+                        // '<a href="editDataDetailKelas/' + id_kelas_detail + '">Edit</a> | <a href="viewDetailDataKelas"> Lihat</a>'
+                        '<a href="viewDetailDataKelas/'+id_kelas_detail+'"> Lihat</a>'
                     );
                 },
             },

@@ -19,7 +19,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= base_url('frontend');?>/assets/css/bootstrap.min.css">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="<?= base_url('frontend');?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url('frontend');?>/assets/css/style1.css">
     <!-- ALL VERSION CSS -->
     <link rel="stylesheet" href="<?= base_url('frontend');?>/assets/css/versions.css">
     <!-- Responsive CSS -->

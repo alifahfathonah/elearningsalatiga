@@ -1,4 +1,5 @@
-let getKelas = document.getElementById('id_kelas').value;
+let pageURL = window.location.href;
+let getKelas = pageURL.substr(pageURL.lastIndexOf('/') + 1);
 // View Datatable Item
 $(document).ready(function() {
     $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
@@ -41,7 +42,7 @@ $(document).ready(function() {
 
         // Load data for the table's content from an Ajax source
         ajax: {
-            url: "jsonSiswa/" + getKelas,
+            url: "../jsonSiswa/" + getKelas,
             type: "POST",
         },
         columns: [{
@@ -72,9 +73,9 @@ $(document).ready(function() {
             {
                 data: "tgl_lahir",
                 className: "text-center",
-                render: function(data, type, full) {
-                    return moment(data).format("DD MMMM YYYY");
-                },
+                // render: function(data, type, full) {
+                //     return moment(data).format("DD MMMM YYYY");
+                // },
             },
             {
                 data: "jenis_kelamin",

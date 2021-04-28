@@ -1798,5 +1798,15 @@ class Dashboard extends CI_Controller
         }
     }
 
+    // Cetak Data Mitra BKK
+    public function cetakMitraBkk()
+    {
+        $data       = [
+            'mitrabkk'     => $this->Dashboard->viewAll('*', 'mitrabkk')->result_array()
+        ];
+
+        $this->load->view('cetakMitraBKK', $data);
+    }
+
     // QUICK LINK END   //
 }

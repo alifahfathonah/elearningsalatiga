@@ -74,7 +74,7 @@ $(document).ready(function() {
                 className: "text-center",
                 render: function(id_kelas_detail, type, full, meta) {
                     return (
-                        '<a href="pengajar/viewDetailDataKelas"> Lihat</a>'
+                        '<a href="pengajar/viewDetailDataKelas/'+id_kelas_detail+'"> Lihat</a>'
                     );
                 },
             },

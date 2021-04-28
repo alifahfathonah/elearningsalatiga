@@ -32,7 +32,7 @@ class Home extends CI_Controller
         );
         $data 	        = [
             'titles'	    => 'Home Siswa',
-            'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id'))->result_array(),
+            'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
             'kelas_det'     => $this->Dashboard->viewGlobalJoinWhere(
                 'kelas_detail.id_kelas_detail AS id_kelas_detail,
                 kelas_detail.kelas AS kelas,
@@ -50,9 +50,26 @@ class Home extends CI_Controller
             'view'		    => "v_Home"
         ];
 
-        $this->load->view("index", $data);
+            $this->load->view("index", $data);
     }
 
+    // Profile Siswa
+    public function profile($id=0)
+    {
+        if($id!=0){
+            $data 	        = [
+                'titles'	    => 'Home Siswa || Profile Siswa Pages',
+                'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
+                'iconbread'     => 'fa fa-home',
+                'breadcumb'     => ucwords($this->uri->segment('1')),
+                'subbread'      => 'Profile Siswa',
+                'view'		    => "v_EditProfile"
+            ];
+    
+            $this->load->view("index", $data);
+        }
+    }
+    
     // View Edit Password
     public function editPassword()
     {
@@ -155,6 +172,7 @@ class Home extends CI_Controller
 
             $data 	            = [
                 'titles'	    => 'Dashboard Siswa || View File Materi Detail Pages',
+                'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
                 'viewMateri'    => $this->Dashboard->getPagi('*', 'file_materi', ['id_kelas'  =>$id], $config["per_page"], $data['page'])->result_array(),
                 'iconbread'     => 'fa fa-home',
                 'breadcumb'     => ucwords($this->uri->segment('1')),
@@ -192,6 +210,7 @@ class Home extends CI_Controller
         $cekSiswa           = $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array();
         $data 	            = [
             'titles'	    => 'Dashboard Siswa || View Materi Pages',
+            'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
             'viewMateri'    => $this->Dashboard->viewWhere('file_materi', 'id_kelas', $cekSiswa[0]['id_kelas'])->result_array(),
             'iconbread'     => 'fa fa-home',
             'breadcumb'     => ucwords($this->uri->segment('1')),
@@ -208,6 +227,7 @@ class Home extends CI_Controller
     {
         $data 	            = [
             'titles'	    => 'Dashboard Siswa || View Quis Pages',
+            'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
             'iconbread'     => 'fa fa-home',
             'breadcumb'     => ucwords($this->uri->segment('1')),
             'pagination'    => $this->pagination->create_links(),
@@ -236,7 +256,7 @@ class Home extends CI_Controller
             );
             $data 	        = [
                 'titles'	    => 'Dashboard Siswa || View Soal Siswa Pages',
-                'user'          => $this->Dashboard->viewWhere('pengajar', 'id_pengajar', $this->session->userdata('id'))->result_array(),
+                'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
                 'topik'         => $this->Dashboard->viewGlobalJoinWhere(
                     '
                     topik_quiz.id_tq AS id_tq,
@@ -429,6 +449,7 @@ class Home extends CI_Controller
             );
         $data 	            = [
             'titles'	    => 'Dashboard Siswa || View Nilai Pages',
+            'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
             'nilai'         => $this->Dashboard->viewGlobalJoinWhere(
                 'nilai.id_nilai AS id_nilai,
                 nilai.id_tq AS id_tq,
@@ -480,6 +501,7 @@ class Home extends CI_Controller
                 );
             $data 	            = [
             'titles'	    => 'Dashboard Siswa || View Nilai Pages',
+            'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
             'nilai'         => $this->Dashboard->viewGlobalJoinWhere(
                 'nilai.id_nilai AS id_nilai,
                 nilai.id_tq AS id_tq,
@@ -522,6 +544,7 @@ class Home extends CI_Controller
         $cekSiswa           = $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array();
         $data 	            = [
             'titles'	    => 'Dashboard Siswa || View Testimoni Pages',
+            'user'          => $this->Dashboard->viewWhere('siswa', 'id_siswa', $this->session->userdata('id_siswa'))->result_array(),
             'iconbread'     => 'fa fa-home',
             'breadcumb'     => ucwords($this->uri->segment('1')),
             'pagination'    => $this->pagination->create_links(),

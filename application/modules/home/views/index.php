@@ -6,7 +6,7 @@ $this->load->view('templates/v_HeaderSiswa');
 $this->load->view('templates/v_MenuSiswa');
 
 // Left Content
-$this->load->view('templates/v_MenuLeftSiswa');
+// $this->load->view('templates/v_MenuLeftSiswa');
 
 // Content View
 $this->load->view($view);
